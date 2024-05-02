@@ -38,6 +38,10 @@
             text-align: center;
             margin-bottom: 20px; /* Papildus atstarpe zem meklēšanas */
         }
+        #itemCount {
+            text-align: right;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -47,6 +51,7 @@
         <input type="text" id="searchInput" placeholder="Search item...">
         <button onclick="filterItems()">Search</button>
     </div>
+    <div id="itemCount">Total Items: <span id="totalItemsCount"></span></div>
     <table id="itemsTable">
         <thead>
             <tr>
@@ -68,6 +73,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        // Filtrēšanas funkcija
         function filterItems() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("searchInput");
@@ -87,6 +93,12 @@
                 }
             }
         }
+
+        // Rēķina un iestata kopējo priekšmetu skaitu
+        document.addEventListener("DOMContentLoaded", function() {
+            var totalItems = document.querySelectorAll(".itemRow").length;
+            document.getElementById("totalItemsCount").textContent = totalItems;
+        });
     </script>
 </body>
 </html>
