@@ -34,8 +34,5 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 
 Route::get('/tarkov', [TarkovController::class, 'index'])->name('tarkov.index');
-Route::get('/tarkov/about', [TarkovController::class, 'about'])->name('tarkov.about');
-Route::get('/tarkov/profile/{username}', [TarkovController::class, 'userProfile'])->name('tarkov.profile');
-Route::get('/tarkov/inventory', [TarkovController::class, 'inventory'])->name('tarkov.inventory');
 Route::get('/tarkov/ammo', [TarkovController::class, 'fetchAmmo'])->name('tarkov.ammo');
 Route::get('/items', [TarkovController::class, 'items']);

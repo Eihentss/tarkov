@@ -8,57 +8,55 @@
     <title>Tarkov - Ammo</title>
     <style>
         body {
-            background-color: #000; /* Melns fons */
-            color: #fff; /* Baltais teksts */
+            background-color: #000;
+            color: #fff;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
-        /* Papildus stili */
+        /* Additional styles */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px; /* Papildus atstarpe virs tabulas */
+            margin-top: 20px;
         }
         th, td {
-            border: 1px solid #fff; /* Baltas rāmīši */
+            border: 1px solid #fff;
             padding: 8px;
             text-align: left;
         }
         th {
-            background-color: #333; /* Tumši pelēks fons virsrakstiem */
+            background-color: #333;
         }
         img {
             max-width: 50px;
         }
         h1 {
             text-align: center;
-            margin-top: 20px; /* Papildus atstarpe virs virsraksta */
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 @include('navbar')
-    <h1>Ammo Items</h1>
-    <table>
-        <thead>
-            <tr>
+<h1>Ammo Items</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
             <th>Icon</th>
-                <th>Name</th>
-
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($ammoItems as $ammo)
-                <tr>
+        </tr>
+    </thead>
+    <tbody>
+        {{-- Display ammo items sorted alphabetically --}}
+        @foreach($ammoItems as $ammo)
+            <tr>
+                <td>{{ $ammo['name'] }}</td>
                 <td><img src="{{ $ammo['iconLink'] }}" alt="{{ $ammo['name'] }}"></td>
-                    <td>{{ $ammo['name'] }}</td>
-
-
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
 </body>
 </html>

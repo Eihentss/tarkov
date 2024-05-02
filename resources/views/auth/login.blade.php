@@ -118,9 +118,5 @@
             </div>
         </div>
     </main>
-
-    <footer>
-        <p>&copy; {{ date('Y') }} Tarkov Website</p>
-    </footer>
 </body>
 </html>
