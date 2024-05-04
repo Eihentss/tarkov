@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarkov - Ammo</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
     <style>
         /* CSS stili navbar elementiem */
         .navbar {
@@ -43,11 +43,10 @@
 </head>
 <body>
     <div class="navbar">
-    <a href="/items">
+    <a href="/">
     <img src="{{ asset('images/tarkov-dev-logo.png') }}" alt="Logo">
 </a>
 
-        <a href="/">Home</a>
         <a href="/tarkov/ammo">Ammo</a>
         <a href="/tarkov/task">Tasks</a>
         <a href="/items">Items</a>

@@ -18,9 +18,6 @@ use App\Http\Controllers\TarkovController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 
@@ -33,6 +30,10 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 
 
-Route::get('/tarkov', [TarkovController::class, 'index'])->name('tarkov.index');
+
 Route::get('/tarkov/ammo', [TarkovController::class, 'fetchAmmo'])->name('tarkov.ammo');
+Route::get('/tarkov/task', [TarkovController::class, 'fetchTasks'])->name('tarkov.task');
 Route::get('/items', [TarkovController::class, 'items']);
+
+
+Route::get('/', [TarkovController::class, 'items']);
