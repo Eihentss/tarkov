@@ -15,6 +15,17 @@ class TarkovController extends Controller
                 id
                 name
                 iconLink
+                description
+                basePrice
+                properties {
+                    ... on ItemPropertiesAmmo {
+                        caliber
+                        damage
+                        penetrationPower
+                        fragmentationChance
+                        armorDamage
+                    }
+                }
             }
         }';
     
@@ -27,7 +38,7 @@ class TarkovController extends Controller
         ]));
     
         $result = json_decode($data, true);
-    
+
         // Check if 'items' key exists in the response and if it's not empty
         if (isset($result['data']['items']) && !empty($result['data']['items'])) {
             // Get all items
@@ -80,6 +91,10 @@ class TarkovController extends Controller
                 shortName
                 wikiLink
                 iconLink
+                basePrice
+                weight
+
+
             }
         }';
         

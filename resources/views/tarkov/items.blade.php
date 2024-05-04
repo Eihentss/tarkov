@@ -17,18 +17,22 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px; /* Papildus atstarpe virs tabulas */
+            margin-top: 20px;
         }
         th, td {
-            border: 1px solid #fff; /* Baltas rāmīši */
+            border: 1px solid #fff;
             padding: 8px;
-            text-align: left;
+            text-align: center;
+            max-width: 100px;
+            height: 50px; /* Set a fixed height for all table rows */
         }
         th {
-            background-color: #333; /* Tumši pelēks fons virsrakstiem */
+            max-width: 50px;
+            background-color: #333;
         }
         img {
             max-width: 50px;
+            float:left;
         }
         h1 {
             text-align: center;
@@ -55,17 +59,21 @@
     <table id="itemsTable">
         <thead>
             <tr>
-                <th>Image</th>
                 <th>Name</th>
-                <th>Wiki</th>
+                <th>weight</th>
+                <th>Price</th>
             </tr>
         </thead>
         <tbody>
             @foreach($items as $item)
                 <tr class="itemRow">
-                    <td><img src="{{ $item['iconLink'] }}" alt="{{ $item['name'] }}"></td>
-                    <td>{{ $item['name'] }}</td>
-                    <td><a href="{{ $item['wikiLink'] }}">Wiki</a></td>
+                <td>
+                <img src="{{ $item['iconLink'] }}" alt="{{ $item['name'] }}">
+                {{ $item['name'] }}</td>
+ 
+                    <td>{{ $item['weight'] }}</td>
+                    <td>{{ $item['basePrice'] }}$</td>
+
                 </tr>
             @endforeach
         </tbody>
