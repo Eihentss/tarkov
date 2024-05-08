@@ -160,44 +160,42 @@ class TarkovController extends Controller
     }
 
     public function fetchTasks()
-{
-    $headers = ['Content-Type: application/json'];
+    {
+        $headers = ['Content-Type: application/json'];
 
-    $query = 'query {
-        tasks {
-            id
-            name
-            taskImageLink
-            trader {
+        $query = 'query {
+            tasks {
                 id
                 name
-                imageLink
+                taskImageLink
+                trader {
+                    id
+                    name
+                    imageLink
+                }
+
             }
-            TaskStatusRequirement{
-                task
-            }
+        }';
+
+        $data = @file_get_contents('https://api.tarkov.dev/graphql', false, stream_context_create([
+            'http' => [
+                'method' => 'POST',
+                'header' => $headers,
+                'content' => json_encode(['query' => $query]),
+            ]
+        ]));
+
+        $result = json_decode($data, true);
+    //  dd($data);
+        // Check if 'tasks' key exists in the response and if it's not empty
+        if (isset($result['data']['tasks']) && !empty($result['data']['tasks'])) {
+            $tasks = $result['data']['tasks'];
+        } else {
+            $tasks = []; // or handle the absence of data as needed
         }
-    }';
 
-    $data = @file_get_contents('https://api.tarkov.dev/graphql', false, stream_context_create([
-        'http' => [
-            'method' => 'POST',
-            'header' => $headers,
-            'content' => json_encode(['query' => $query]),
-        ]
-    ]));
-
-    $result = json_decode($data, true);
- dd($data);
-    // Check if 'tasks' key exists in the response and if it's not empty
-    if (isset($result['data']['tasks']) && !empty($result['data']['tasks'])) {
-        $tasks = $result['data']['tasks'];
-    } else {
-        $tasks = []; // or handle the absence of data as needed
+        return view('tarkov.tasks')->with('tasks', $tasks);
     }
-
-    return view('tarkov.tasks')->with('tasks', $tasks);
-}
         
 }
 

@@ -60,12 +60,8 @@
     <thead>
         <tr>
             <th>Task</th>
-            <th>Required tasks</th>
             <th>Minimum level</th>
             <th>Reputation rewards</th>
-            <th>Endgame</th>
-            <th>Task Requirements</th>
-            <th>Task Requirement Status</th>
         </tr>
     </thead>
     <tbody>
