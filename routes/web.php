@@ -37,3 +37,4 @@ Route::get('/items', [TarkovController::class, 'items']);
 
 
 Route::get('/', [TarkovController::class, 'items']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

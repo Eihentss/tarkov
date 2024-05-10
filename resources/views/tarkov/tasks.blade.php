@@ -3,80 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/images/favicon-32x32.png" type="image/x-icon">
     <title>Tarkov - tasks</title>
-    <style>
-        /* Fona stili */
-        body {
-            background-color: #000; /* Melns fons */
-            color: #fff; /* Baltais teksts */
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        /* Papildus stili */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #fff;
-            padding: 8px;
-            text-align: center;
-            max-width: 100px;
-            height: 50px; /* Set a fixed height for all table rows */
-        }
-        th {
-            max-width: 50px;
-            background-color: #333;
-        }
-        img {
-            max-width: 50px;
-            float:left;
-        }
-        h1 {
-            text-align: center;
-            margin-top: 20px; /* Papildus atstarpe virs virsraksta */
-        }
-        #searchBar {
-            text-align: center;
-            margin-bottom: 20px; /* Papildus atstarpe zem meklēšanas */
-        }
-        #itemCount {
-            text-align: right;
-            margin-bottom: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="/app.css">
 </head>
 <body>
-@include('navbar')
-    <h1>Escape from Tarkov Items</h1>
+    @include('navbar')
+    <h1>Escape from Tarkov tasks</h1>
     <div id="searchBar">
         <input type="text" id="searchInput" placeholder="Search item...">
         <button onclick="filterItems()">Search</button>
     </div>
-    <div id="itemCount">Total Items: <span id="totalItemsCount"></span></div>
+   
     <table id="itemsTable">
-    <thead>
-        <tr>
-            <th>Task</th>
-            <th>Minimum level</th>
-            <th>Reputation rewards</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($tasks as $item)
-            <tr class="itemRow">
-                <td>
-                    <img src="{{ $item['trader']['imageLink'] ?? 'N/A' }}" alt="{{ $item['trader']['name'] ?? 'N/A' }}">
-                    {{ $item['name'] }}
-                </td>
-                <td>{{ $item['taskRequirements']['task']['name'] ?? 'N/A' }}</td>
-                <td>{{ $item['taskRequirements']['status'] ?? 'N/A' }}</td>
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">Task</th>
+                <th onclick="sortTable(1)">Minimum level</th>
+                <th onclick="sortTable(2)">kappaRequired</th>
             </tr>
-        @endforeach
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach($tasks as $item)
+                <tr class="itemRow">
+                    <td>
+                        <img src="{{ $item['trader']['imageLink'] ?? '/images/default.png' }}" alt="{{ $item['trader']['name'] ?? 'N/A' }}">
+                        {{ $item['name'] }}
+                    </td>
+                    <td>{{ $item['minPlayerLevel'] ?? 'N/A' }}</td>
+                    <td>
+                        @if($item['kappaRequired'] == 1)
+                            Kappa Required
+                        @else
+                            {{ $item['kappaRequired'] ?? 'N/A' }}
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function filterItems() {
+            var input, filter, table, tr, td, i, j, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("itemsTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                let found = false;
+                for (j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            found = true;
+                            break; // Stop checking other columns if found in one
+                        }
+                    }
+                }
+                tr[i].style.display = found ? "" : "none";
+            }
+            
+            // Parāda tabulas galvenes rindu atkārtoti pēc meklēšanas
+            var tableHead = document.getElementById("tableHead");
+            tableHead.style.display = "";
+        }
+
+
+    </script>
 </body>
 </html>
