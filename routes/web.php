@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TarkovController;
+use App\Http\Controllers\LogoutController;
 
 
 /*
@@ -37,4 +38,7 @@ Route::get('/items', [TarkovController::class, 'items']);
 
 
 Route::get('/', [TarkovController::class, 'items']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
+
+// Vai ja ir vienkāršs kontrolieris
+Route::get('/logout', 'App\Http\Controllers\LogoutController@logout')->name('logout');

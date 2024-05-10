@@ -131,6 +131,9 @@
                         <div class="form-group">
                             <button type="submit">{{ __('Register') }}</button>
                         </div>
+                        <div class="form-group">
+                        <p>have an account? <a href="{{ route('login') }}">Login here</a></p>
+                    </div>
                     </form>
                 </div>
             </div>
